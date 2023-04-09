@@ -12,10 +12,10 @@ export class InputMarkdownComponent implements OnInit {
  markDownCont: '';
 
  @Output()
- changeMarkDown =  new EventEmitter<any>();
+ changeMarkDown =  new EventEmitter<string>();
 
  @Input()
- markdownContent = '';
+ markdownContent: string;
  
   ngOnInit(): void {
 
@@ -23,7 +23,7 @@ export class InputMarkdownComponent implements OnInit {
       biography: '',
   });
   }
-  changeMark(values: any){
+   changeMark(values: any){
     var test = this.changeMarkDown.emit(values.target.value);
     console.log(" Tests 123"+ test);
   }

@@ -5,7 +5,9 @@ export interface movieCreationDTO
     poster: File;
     inTheaters:boolean;
     releaseDate: Date;
-    trailer:string
+    trailer:string;
+    generesId: number[];
+    movieTheaterId: number[];
 }
 
 

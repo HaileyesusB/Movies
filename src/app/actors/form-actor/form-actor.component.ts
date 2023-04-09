@@ -38,9 +38,9 @@ export class FormActorComponent implements OnInit {
     }
   }
 
-  changeMarkDown(content : any)
+  changeMarkDown(content: any)
   {
-     this.form.get('biography')?.setValue(content);
+     this.form.get('biography').setValue(content);
   }
 
   onImageSelected(image: any)

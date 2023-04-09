@@ -1,7 +1,10 @@
+import { movieTheatersCreationDTO } from './../../movie-theaters/movie-theater.model';
+import { movieCreationDTO } from './../movies.model';
 import { Validators } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { moviesDTO } from '../movies.model';
+import { multipleSelectorModel } from 'src/app/utilities/multiple-selector/multiple-selector.model';
 
 @Component({
   selector: 'app-form-movie',
@@ -10,10 +13,32 @@ import { moviesDTO } from '../movies.model';
 })
 export class FormMovieComponent implements OnInit {
   constructor(private formBuilder: FormBuilder){}
-  
+  form:FormGroup;
+
   @Input()
   model: moviesDTO;
-  form:FormGroup;
+  
+
+  @Output()
+  onSaveChanges = new EventEmitter<movieCreationDTO>();
+
+  nonSelectedGenres: multipleSelectorModel[] = [
+    {key: 1, value: 'Drama'},
+    {key: 2, value: 'Comedy'},
+    {key: 3, value: 'Sci-Fic'}
+
+  ];
+
+  selectedGenres: multipleSelectorModel[] = [];
+  
+  nonSelectedMovieTheaters: multipleSelectorModel[] = [
+    {key: 1, value: 'Agore'},
+    {key: 2, value: 'Sambil'},
+    {key: 3, value: 'Megacentro'}
+  ];
+
+  selectedMovieTheaters: multipleSelectorModel[] =[];
+
   ngOnInit(): void {
     this.form = this.formBuilder.group({
        title: ['', {
@@ -23,7 +48,9 @@ export class FormMovieComponent implements OnInit {
        inTheaters: false,
        trailer: '',
        releaseDate: '',
-       poster: ''
+       poster: '',
+       genersId: '',
+       movieTheaterId: ''
     }); 
 
     if(this.model !== undefined)
@@ -32,7 +59,14 @@ export class FormMovieComponent implements OnInit {
     }
   }
 
-  saveChanges(){}
+  saveChanges(){
+    const genersIds = this.selectedGenres.map(value => value.key);
+    this.form.get('genersId').setValue(genersIds);
+
+    const movieTheaterIds = this.selectedMovieTheaters.map(value => value.key);
+    this.form.get('movieTheaterId').setValue(movieTheaterIds);
+    this.onSaveChanges.emit(this.form.value);
+  }
 
   onImageSelected(file : File){
     this.form.get('poster').setValue(file);
@@ -43,3 +77,4 @@ export class FormMovieComponent implements OnInit {
   }
 
 }
+

@@ -9,14 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditActorComponent implements OnInit {
 
-  constructor(private activatedRoute:ActivatedRoute ){}
+  constructor(){}
 
 @Input()
   model: actorDto = {name: 'Haile Belew', dateOfBirth: new Date(), 
   picture: 'https://www.pngmart.com/files/21/Actor-PNG-Isolated-Photo.png', 
   biography: 'default value',};
   
-
+ 
   ngOnInit(): void {
   /* 
      this.activatedRoute.params.subscribe(params => {

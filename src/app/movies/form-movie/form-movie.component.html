@@ -30,8 +30,23 @@
    >
    </app-input-markdown>
 
+   <h4><b>Select the Genres</b></h4>
+   <app-multiple-selector [NonSelectedItems]="nonSelectedGenres"
+   [SelectedItems]="selectedGenres">
+
+   </app-multiple-selector>
+
+   <h4><b>Select the Movie Theaters</b></h4>
+   <app-multiple-selector [NonSelectedItems]="nonSelectedMovieTheaters"
+   [SelectedItems]="selectedMovieTheaters">
+   </app-multiple-selector>
+
+   <h4><b>Select the Actors</b></h4>
+   <app-actors-autocomplete ></app-actors-autocomplete>
+
    <div>
-    <button mat-flat-button color="primary" [disabled]="form.invalid">Save</button>
+    <button mat-flat-button color="primary" [disabled]="form.invalid" 
+    (click)="saveChanges()">Save Changes</button>
     <a mat-stroked-button routerLink="/">Cancel</a>
    </div>
 
